@@ -10,6 +10,12 @@ struct Tensor {
 
     Tensor(unsigned int const shape_[N]) {
         unsigned int size = 1;
+        for (unsigned int i = 0; i < N; ++i) {
+            ASSERT(shape_[i] > 0, "Invalid shape");
+            shape[i] = shape_[i];
+            // TODO: 填入正确的 shape 并计算 size
+            size *= shape[i];
+        }
         // TODO: 填入正确的 shape 并计算 size
         data = new T[size];
         std::memset(data, 0, size * sizeof(T));
@@ -32,9 +38,16 @@ struct Tensor {
 private:
     unsigned int data_index(unsigned int const indices[N]) const {
         unsigned int index = 0;
-        for (unsigned int i = 0; i < N; ++i) {
+        int step = 1;
+        for (unsigned int i = N - 1; i < N; --i) {
             ASSERT(indices[i] < shape[i], "Invalid index");
             // TODO: 计算 index
+            // 2 3 4 5
+            //(120) 60  20  5  i
+
+
+            index += indices[i] * step;//0 4 4+15 4+15+40 4+15+40+60
+            step *= shape[i];          //1 5 20 60 120
         }
         return index;
     }
