@@ -1,6 +1,9 @@
 ﻿#include "../exercise.h"
 #include <cstdio>
+#include <cstring>// for std::memcpy
 #include <ostream>
+
+
 
 // READ: 类模板 <https://zh.cppreference.com/w/cpp/language/class_template>
 
